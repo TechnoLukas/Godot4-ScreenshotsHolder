@@ -1,0 +1,155 @@
+[gd_scene load_steps=11 format=3 uid="uid://csxap5exmtwm4"]
+
+[ext_resource type="Script" path="res://window.gd" id="1_h6lj5"]
+[ext_resource type="Script" path="res://button.gd" id="2_uxuoc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b3ffw"]
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="ImageTexture" id="ImageTexture_p66dg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pfnf6"]
+bg_color = Color(0, 0, 0, 0.196078)
+corner_radius_top_left = 360
+corner_radius_top_right = 360
+corner_radius_bottom_right = 360
+corner_radius_bottom_left = 360
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wp3u4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ftmol"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_apads"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_evveb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bgwty"]
+
+[node name="Window" type="Window"]
+transparent_bg = true
+initial_position = 2
+size = Vector2i(300, 300)
+borderless = true
+script = ExtResource("1_h6lj5")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_b3ffw")
+
+[node name="Image" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ImageTexture_p66dg")
+
+[node name="Menu" type="Panel" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -60.0
+offset_bottom = 280.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pfnf6")
+
+[node name="List" type="VBoxContainer" parent="."]
+anchors_preset = -1
+anchor_right = 1.007
+offset_left = -60.0
+offset_top = 4.0
+offset_right = 6.10352e-05
+offset_bottom = 252.0
+grow_horizontal = 0
+theme_override_constants/separation = -10
+
+[node name="Menu" type="Button" parent="List"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 2
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wp3u4")
+text = "⚙️"
+flat = true
+icon_alignment = 1
+script = ExtResource("2_uxuoc")
+
+[node name="Close" type="Button" parent="List"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 2
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ftmol")
+text = "❌"
+flat = true
+icon_alignment = 1
+script = ExtResource("2_uxuoc")
+
+[node name="Save" type="Button" parent="List"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 2
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_apads")
+text = "💾"
+flat = true
+icon_alignment = 1
+script = ExtResource("2_uxuoc")
+
+[node name="Copy" type="Button" parent="List"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 2
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_evveb")
+text = "📑"
+flat = true
+icon_alignment = 1
+script = ExtResource("2_uxuoc")
+
+[node name="Pin" type="Button" parent="List"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 2
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bgwty")
+text = "📌"
+flat = true
+icon_alignment = 1
+script = ExtResource("2_uxuoc")
+
+[connection signal="window_input" from="." to="." method="_on_window_input"]
+[connection signal="button_down" from="List/Menu" to="List/Menu" method="_on_button_down"]
+[connection signal="button_up" from="List/Menu" to="List/Menu" method="_on_button_up"]
+[connection signal="mouse_entered" from="List/Menu" to="List/Menu" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="List/Menu" to="List/Menu" method="_on_mouse_exited"]
+[connection signal="pressed" from="List/Menu" to="." method="_on_menu_pressed"]
+[connection signal="button_down" from="List/Close" to="List/Close" method="_on_button_down"]
+[connection signal="button_up" from="List/Close" to="List/Close" method="_on_button_up"]
+[connection signal="mouse_entered" from="List/Close" to="List/Close" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="List/Close" to="List/Close" method="_on_mouse_exited"]
+[connection signal="pressed" from="List/Close" to="." method="_on_close_pressed"]
+[connection signal="button_down" from="List/Save" to="List/Save" method="_on_button_down"]
+[connection signal="button_up" from="List/Save" to="List/Save" method="_on_button_up"]
+[connection signal="mouse_entered" from="List/Save" to="List/Save" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="List/Save" to="List/Save" method="_on_mouse_exited"]
+[connection signal="pressed" from="List/Save" to="." method="_on_save_pressed"]
+[connection signal="tree_exited" from="List/Save" to="." method="_on_save_tree_exited"]
+[connection signal="button_down" from="List/Copy" to="List/Copy" method="_on_button_down"]
+[connection signal="button_up" from="List/Copy" to="List/Copy" method="_on_button_up"]
+[connection signal="mouse_entered" from="List/Copy" to="List/Copy" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="List/Copy" to="List/Copy" method="_on_mouse_exited"]
+[connection signal="pressed" from="List/Copy" to="." method="_on_copy_pressed"]
+[connection signal="button_down" from="List/Pin" to="List/Pin" method="_on_button_down"]
+[connection signal="button_up" from="List/Pin" to="List/Pin" method="_on_button_up"]
+[connection signal="mouse_entered" from="List/Pin" to="List/Pin" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="List/Pin" to="List/Pin" method="_on_mouse_exited"]
+[connection signal="pressed" from="List/Pin" to="." method="_on_pin_pressed"]
