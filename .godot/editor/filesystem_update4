@@ -1,4 +1,5 @@
 res://menu.tscn
 res://window.gd
-res://main.tscn
+res://menubg.tres
 res://window.tscn
+res://main.tscn

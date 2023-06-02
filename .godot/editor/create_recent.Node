@@ -1,8 +1,8 @@
 VBoxContainer
+ColorRect
 Panel
 Button
 Window
-ColorRect
 Popup
 Control
 PopupMenu

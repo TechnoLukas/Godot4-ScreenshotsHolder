@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://csxap5exmtwm4"]
+[gd_scene load_steps=12 format=3 uid="uid://csxap5exmtwm4"]
 
 [ext_resource type="Script" path="res://window.gd" id="1_h6lj5"]
+[ext_resource type="StyleBox" uid="uid://cscy0d4bos125" path="res://menubg.tres" id="2_fr3ju"]
 [ext_resource type="Script" path="res://button.gd" id="2_uxuoc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b3ffw"]
@@ -11,12 +12,8 @@ corner_radius_bottom_left = 20
 
 [sub_resource type="ImageTexture" id="ImageTexture_p66dg"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pfnf6"]
-bg_color = Color(0, 0, 0, 0.196078)
-corner_radius_top_left = 360
-corner_radius_top_right = 360
-corner_radius_bottom_right = 360
-corner_radius_bottom_left = 360
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l0oib"]
+bg_color = Color(0.556863, 0.556863, 0.556863, 0)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wp3u4"]
 
@@ -51,29 +48,41 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("ImageTexture_p66dg")
 
-[node name="Menu" type="Panel" parent="."]
+[node name="menuzone" type="Panel" parent="."]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -60.0
-offset_bottom = 280.0
+offset_bottom = 276.962
 grow_horizontal = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_pfnf6")
+theme_override_styles/panel = SubResource("StyleBoxFlat_l0oib")
 
-[node name="List" type="VBoxContainer" parent="."]
-anchors_preset = -1
-anchor_right = 1.007
+[node name="menubg" type="Panel" parent="menuzone"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
 offset_left = -60.0
-offset_top = 4.0
-offset_right = 6.10352e-05
-offset_bottom = 252.0
+offset_bottom = 278.634
 grow_horizontal = 0
+theme_override_styles/panel = ExtResource("2_fr3ju")
+
+[node name="List" type="VBoxContainer" parent="menuzone"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -31.671
+offset_top = 0.738
+offset_right = 31.672
+offset_bottom = 275.738
+grow_horizontal = 2
 theme_override_constants/separation = -10
 
-[node name="Menu" type="Button" parent="List"]
+[node name="Menu" type="Button" parent="menuzone/List"]
 layout_mode = 2
 size_flags_horizontal = 10
-size_flags_vertical = 2
+size_flags_vertical = 0
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 40
 theme_override_styles/focus = SubResource("StyleBoxEmpty_wp3u4")
@@ -82,10 +91,11 @@ flat = true
 icon_alignment = 1
 script = ExtResource("2_uxuoc")
 
-[node name="Close" type="Button" parent="List"]
+[node name="Close" type="Button" parent="menuzone/List"]
 layout_mode = 2
 size_flags_horizontal = 10
-size_flags_vertical = 2
+size_flags_vertical = 0
+tooltip_text = "Closes this flowting window"
 theme_override_font_sizes/font_size = 40
 theme_override_styles/focus = SubResource("StyleBoxEmpty_ftmol")
 text = "❌"
@@ -93,21 +103,24 @@ flat = true
 icon_alignment = 1
 script = ExtResource("2_uxuoc")
 
-[node name="Save" type="Button" parent="List"]
+[node name="Save" type="Button" parent="menuzone/List"]
 layout_mode = 2
 size_flags_horizontal = 10
-size_flags_vertical = 2
+size_flags_vertical = 0
+tooltip_text = "[Not implemented yet]"
 theme_override_font_sizes/font_size = 40
 theme_override_styles/focus = SubResource("StyleBoxEmpty_apads")
+disabled = true
 text = "💾"
 flat = true
 icon_alignment = 1
 script = ExtResource("2_uxuoc")
 
-[node name="Copy" type="Button" parent="List"]
+[node name="Copy" type="Button" parent="menuzone/List"]
 layout_mode = 2
 size_flags_horizontal = 10
-size_flags_vertical = 2
+size_flags_vertical = 0
+tooltip_text = "Copies this screenshot to your clipboard."
 theme_override_font_sizes/font_size = 40
 theme_override_styles/focus = SubResource("StyleBoxEmpty_evveb")
 text = "📑"
@@ -115,10 +128,11 @@ flat = true
 icon_alignment = 1
 script = ExtResource("2_uxuoc")
 
-[node name="Pin" type="Button" parent="List"]
+[node name="Pin" type="Button" parent="menuzone/List"]
 layout_mode = 2
 size_flags_horizontal = 10
-size_flags_vertical = 2
+size_flags_vertical = 0
+tooltip_text = "toggles \"Always on top\""
 theme_override_font_sizes/font_size = 40
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bgwty")
 text = "📌"
@@ -127,29 +141,29 @@ icon_alignment = 1
 script = ExtResource("2_uxuoc")
 
 [connection signal="window_input" from="." to="." method="_on_window_input"]
-[connection signal="button_down" from="List/Menu" to="List/Menu" method="_on_button_down"]
-[connection signal="button_up" from="List/Menu" to="List/Menu" method="_on_button_up"]
-[connection signal="mouse_entered" from="List/Menu" to="List/Menu" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="List/Menu" to="List/Menu" method="_on_mouse_exited"]
-[connection signal="pressed" from="List/Menu" to="." method="_on_menu_pressed"]
-[connection signal="button_down" from="List/Close" to="List/Close" method="_on_button_down"]
-[connection signal="button_up" from="List/Close" to="List/Close" method="_on_button_up"]
-[connection signal="mouse_entered" from="List/Close" to="List/Close" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="List/Close" to="List/Close" method="_on_mouse_exited"]
-[connection signal="pressed" from="List/Close" to="." method="_on_close_pressed"]
-[connection signal="button_down" from="List/Save" to="List/Save" method="_on_button_down"]
-[connection signal="button_up" from="List/Save" to="List/Save" method="_on_button_up"]
-[connection signal="mouse_entered" from="List/Save" to="List/Save" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="List/Save" to="List/Save" method="_on_mouse_exited"]
-[connection signal="pressed" from="List/Save" to="." method="_on_save_pressed"]
-[connection signal="tree_exited" from="List/Save" to="." method="_on_save_tree_exited"]
-[connection signal="button_down" from="List/Copy" to="List/Copy" method="_on_button_down"]
-[connection signal="button_up" from="List/Copy" to="List/Copy" method="_on_button_up"]
-[connection signal="mouse_entered" from="List/Copy" to="List/Copy" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="List/Copy" to="List/Copy" method="_on_mouse_exited"]
-[connection signal="pressed" from="List/Copy" to="." method="_on_copy_pressed"]
-[connection signal="button_down" from="List/Pin" to="List/Pin" method="_on_button_down"]
-[connection signal="button_up" from="List/Pin" to="List/Pin" method="_on_button_up"]
-[connection signal="mouse_entered" from="List/Pin" to="List/Pin" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="List/Pin" to="List/Pin" method="_on_mouse_exited"]
-[connection signal="pressed" from="List/Pin" to="." method="_on_pin_pressed"]
+[connection signal="button_down" from="menuzone/List/Menu" to="menuzone/List/Menu" method="_on_button_down"]
+[connection signal="button_up" from="menuzone/List/Menu" to="menuzone/List/Menu" method="_on_button_up"]
+[connection signal="mouse_entered" from="menuzone/List/Menu" to="menuzone/List/Menu" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="menuzone/List/Menu" to="menuzone/List/Menu" method="_on_mouse_exited"]
+[connection signal="pressed" from="menuzone/List/Menu" to="." method="_on_menu_pressed"]
+[connection signal="button_down" from="menuzone/List/Close" to="menuzone/List/Close" method="_on_button_down"]
+[connection signal="button_up" from="menuzone/List/Close" to="menuzone/List/Close" method="_on_button_up"]
+[connection signal="mouse_entered" from="menuzone/List/Close" to="menuzone/List/Close" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="menuzone/List/Close" to="menuzone/List/Close" method="_on_mouse_exited"]
+[connection signal="pressed" from="menuzone/List/Close" to="." method="_on_close_pressed"]
+[connection signal="button_down" from="menuzone/List/Save" to="menuzone/List/Save" method="_on_button_down"]
+[connection signal="button_up" from="menuzone/List/Save" to="menuzone/List/Save" method="_on_button_up"]
+[connection signal="mouse_entered" from="menuzone/List/Save" to="menuzone/List/Save" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="menuzone/List/Save" to="menuzone/List/Save" method="_on_mouse_exited"]
+[connection signal="pressed" from="menuzone/List/Save" to="." method="_on_save_pressed"]
+[connection signal="tree_exited" from="menuzone/List/Save" to="." method="_on_save_tree_exited"]
+[connection signal="button_down" from="menuzone/List/Copy" to="menuzone/List/Copy" method="_on_button_down"]
+[connection signal="button_up" from="menuzone/List/Copy" to="menuzone/List/Copy" method="_on_button_up"]
+[connection signal="mouse_entered" from="menuzone/List/Copy" to="menuzone/List/Copy" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="menuzone/List/Copy" to="menuzone/List/Copy" method="_on_mouse_exited"]
+[connection signal="pressed" from="menuzone/List/Copy" to="." method="_on_copy_pressed"]
+[connection signal="button_down" from="menuzone/List/Pin" to="menuzone/List/Pin" method="_on_button_down"]
+[connection signal="button_up" from="menuzone/List/Pin" to="menuzone/List/Pin" method="_on_button_up"]
+[connection signal="mouse_entered" from="menuzone/List/Pin" to="menuzone/List/Pin" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="menuzone/List/Pin" to="menuzone/List/Pin" method="_on_mouse_exited"]
+[connection signal="pressed" from="menuzone/List/Pin" to="." method="_on_pin_pressed"]
